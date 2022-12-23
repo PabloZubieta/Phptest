@@ -20,7 +20,13 @@ function getArticleDetail($code){
 }
 
 function createNewArticle($value){
-    $articledetailquery = "INSERT INTO snows ( code, brand, model, description, descriptionFull, snowLength, price, qtyAvailable, photo, active) VALUES (".$value['code'].", ".$value['brand'].", ".$value['model'].", ".$value['description'].", ".$value['descriptionFull'].", ".$value['snowLength'].", ".$value['price'].", ".$value['qtyAvailable'].", ".$value['photo'].", 1);" ;
+
+    $codeQuery = "SELECT code FROM snows WHERE code='".$value['code']."';";
+    $query = executeQuerySelect($codeQuery)[0];
+    if (isset($query)){
+        return false;
+    }
+    $articledetailquery = "INSERT INTO snows ( code, brand, model, description, descriptionFull, audience, snowLength, price, qtyAvailable, photo, active) VALUES ('".$value['code']."', '".$value['brand']."', '".$value['model']."', '".$value['description']."', '".$value['descriptionFull']."','".$value['audience']."', ".$value['snowLength'].", ".$value['price'].", ".$value['qtyAvailable'].", '".$value['photo']."', 1);" ;
 
     require_once 'models/dbConnector.php';
     return executeQueryinsert($articledetailquery)[0];
@@ -32,8 +38,17 @@ function removeArticle($code){
     return executeQueryUpdate($articledetailquery)[0];
 }
 function updateThisArticle($code,$value){
-    $articledetailquery = "UPDATE snows SET brand = '".$value['brand']."', model= '".$value['brand']."', description= '".$value['brand']."', descriptionFull= '".$value['brand']."', snowLength= ".$value['brand'].", price =".$value['brand'].", qtyAvailable = ".$value['brand'].", photo ='".$value['brand']."', snows.active = ".$value['brand']." WHERE code='".$code."';" ;
 
+    if (isset($value)){
+        $articledetailquery = "UPDATE snows SET brand = '".$value['brand']."', model= '".$value['model']."', description= '".$value['description']."', descriptionFull= '".$value['descriptionFull']."',audience='".$value['audience']."' , snowLength= ".$value['snowLength'].", price =".$value['price'].", qtyAvailable = ".$value['qtyAvailable'].", photo ='".$value['photo']."', active = ".$value['brand']." WHERE code='".$code."';" ;
+
+        require_once 'models/dbConnector.php';
+        return executeQueryUpdate($articledetailquery)[0];
+
+    }
+    $selctedarticle = "SELECT code, brand, model, description, descriptionFull, audience, snowLength, price, qtyAvailable, photo, active FROM snows WHERE code='".$code."';" ;
     require_once 'models/dbConnector.php';
-    return executeQueryUpdate($articledetailquery)[0];
+    return executeQuerySelect($selctedarticle);
+
+
 }

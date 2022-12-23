@@ -39,7 +39,10 @@ ob_start();// stocke dans une variable tampon
                             </th>
 
                         </tr>
-<?php foreach (@$articles as $article) :?>
+<?php foreach (@$articles as $article) :
+   if($article['active']==1) {
+
+      ?>
                         <tr class="table-row">
                             <td class="column-1"><?=$article['code'];?></td>
                             <td class="column-2"><div class="cart-img-product b-rad-4 o-f-hidden">
@@ -50,17 +53,17 @@ ob_start();// stocke dans une variable tampon
                             <td class="column-2"><?=$article['price'];?></td>
                             <td class="column-2"><?=$article['qtyAvailable'];?></td>
                             <td class="column-2">
-                                <a href="index.php?action=update&code=<?=$article['code'];?>" >
+                                <a href="index.php?action=delete&code=<?=$article['code'];?>" >
                                     <button  class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
                                     <img src="views/content/images/icons/bin2.png" alt="delete">
                                     </button></a><br>
-                                <a href="index.php?action=create&code=<?=$article['code'];?>">
+                                <a href="index.php?action=update&code=<?=$article['code'];?>">
                                     <button  class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
                                         <img src="views/content/images/icons/pencil2.png" alt="update">
                                     </button></a>
                             </td>
                         </tr>
-<?php endforeach; ?>
+<?php } endforeach; ?>
 
                     </table>
                 </div>

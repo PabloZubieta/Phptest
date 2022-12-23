@@ -52,16 +52,19 @@ function updateArticle($code,$value){
     }   catch (ModelDataBaseException $ex){
         $articleErrorMessage = "Nous rencontrons des problèmes technique pour afficher les produits";
     } finally {
-        require "views/displayArticlesAdmin.php";
+        require "views/addArticle.php";
     }
 }
 function createArticle($value){
     try{
-        require_once "models/articlesManager.php";
-        createNewArticle($value);
+        if(isset($_POST)){
+            require_once "models/articlesManager.php";
+            createNewArticle($value);
+        }
+
     }   catch (ModelDataBaseException $ex){
         $articleErrorMessage = "Nous rencontrons des problèmes technique pour afficher les produits";
     } finally {
-        require "views/displayArticlesAdmin.php";
+        require "views/addArticle.php";
     }
 }
