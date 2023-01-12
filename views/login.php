@@ -7,7 +7,23 @@
  */
 
 $title = "j'te connais toi";
+@$login = $_POST["inputEmail"];
+@$pass = $_POST["inputUserPswd"];
+@$valider = $_POST["login"];
+$erreur="";
+$trypass=userLogin($login);
+if(isset($valider)){
+    if($pass==$trypass[0]['password']) {
 
+        $_SESSION["connected"]= $trypass[0]['id'];
+        header("location:index.php?action=home");
+    }
+    else {
+        $erreur="le login et le mot de passe ne correspond pas";
+
+    }
+
+}
 ob_start();// stocke dans une variable tampon
 ?>
 
@@ -42,6 +58,14 @@ Connectez-vous
 						<input type="reset" value="Annuler" class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4">
 
 					</form>
+                    <?php if(!empty($erreur)){?>
+    <div id="erreur" >
+    <?=$erreur?>
+    </div>
+
+
+
+<?php }?>
 				</div>
 			</div>
 		</div>

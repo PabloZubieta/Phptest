@@ -333,9 +333,11 @@
 					<li class="item-menu-mobile">
 						<a href="index.php?action=login">Login</a>
 					</li>
+
                     <li class="item-menu-mobile">
                         <a href="index.php?action=displayarticleadmin">admin</a>
                     </li>
+
 				</ul>
 			</nav>
 		</div>
