@@ -32,110 +32,121 @@ ajouter un snow
 						</h4>
 
 						<div class="bo4 of-hidden size15 m-b-20">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="code" placeholder="<?php if(isset($value['code'])){
-                                echo $value['code'];
+							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="code" placeholder="code" <?php if(isset($value['code'])){
+                                echo  'value="'.$value['code'].'"';
                             }
-                            else{
-                                echo "Code";
+                            else if (isset($articleinfo)){
+                                echo  'value="'.$articleinfo['code'].'"';
                             }
-                            ?>" required>
+                            if ($_GET['action']=="update"){
+                               echo "readonly";
+                            }
+                            ?>  required>
 						</div>
 
 						<div class="bo4 of-hidden size15 m-b-20">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="brand" placeholder="<?php if(isset($value['brand'])){
-                                echo $value['brand'];
+							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="brand" placeholder="Marque" <?php if(isset($value['brand'])){
+                                echo 'value="'.$value['brand'].'"';
                             }
-                            else{
-                                echo "Marque";
+                            else if (isset($articleinfo)){
+                                echo  'value="'.$articleinfo['brand'].'"';
                             }
-                            ?>" required>
+                            ?> required>
 						</div>
                         <div class="bo4 of-hidden size15 m-b-20">
-                            <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="model" placeholder="<?php if(isset($value['model'])){
-                                echo $value['model'];
+                            <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="model" placeholder="Modèle" <?php if(isset($value['model'])){
+                                echo 'value="'.$value['model'].'"';
                             }
-                            else{
-                                echo "Modèle";
+                            else if (isset($articleinfo)){
+                                echo  'value="'.$articleinfo['model'].'"';
                             }
-                            ?>" required>
+                            ?> required>
                         </div>
 
                         <div class="bo4 of-hidden size15 m-b-20">
-                            <input class="sizefull s-text7 p-l-22 p-r-22" type="number" name="snowLength" placeholder="<?php if(isset($value['snowLength'])){
-                                echo $value['snowLength'];
+                            <input class="sizefull s-text7 p-l-22 p-r-22" type="number" name="snowLength" placeholder="Longueur du Snow" <?php if(isset($value['snowLength'])){
+                                echo 'value="'.$value['snowLength'].'"';
                             }
-                            else{
-                                echo "Longueur du Snow";
+                            else if (isset($articleinfo)){
+                                echo  'value="'.$articleinfo['snowLength'].'"';
                             }
-                            ?>" required>
+
+                            ?> required>
                         </div>
                         <div class="bo4 of-hidden size15 m-b-20">
-                            <input class="sizefull s-text7 p-l-22 p-r-22" type="number" name="price" placeholder="<?php if(isset($value['price'])){
-                                echo $value['price'];
+                            <input class="sizefull s-text7 p-l-22 p-r-22" type="number" name="price" placeholder="Prix" <?php if(isset($value['price'])){
+                                echo 'value="'.$value['price'].'"';
                             }
-                            else{
-                                echo "Prix";
+                            else if (isset($articleinfo)){
+                                echo  'value="'.$articleinfo['price'].'"';
                             }
-                            ?>" required>
+
+                            ?> required>
                         </div>
                         <div class="bo4 of-hidden size15 m-b-20">
-                            <input class="sizefull s-text7 p-l-22 p-r-22" type="number" name="qtyAvailable" placeholder="<?php if(isset($value['qtyAvailable'])){
-                                echo $value['qtyAvailable'];
+                            <input class="sizefull s-text7 p-l-22 p-r-22" type="number" name="qtyAvailable" placeholder="Quantité disponible" <?php if(isset($value['qtyAvailable'])){
+                                echo 'value="'.$value['qtyAvailable'].'"';
                             }
-                            else{
-                                echo "Quantité disponible";
+                            else if (isset($articleinfo)){
+                                echo  'value="'.$articleinfo['qtyAvailable'].'"';
                             }
-                            ?>" required>
+
+                            ?> required>
                         </div>
 
                         <div class="bo4 of-hidden size15 m-b-20">
-                            <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="description" placeholder="<?php if(isset($value['description'])){
-                                echo $value['description'];
+                            <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="description" placeholder="Description" <?php if(isset($value['description'])){
+                                echo 'value="'.$value['description'].'"';
                             }
-                            else{
-                                echo "Description";
+                            else if (isset($articleinfo)){
+                                echo  'value="'.$articleinfo['description'].'"';
                             }
-                            ?>" required>
+
+                            ?> required>
                         </div>
                         <div >
-                            <span><input type="radio"  name="audience" value="Femme" required>
-                            <label for="css">Femme</label><br></span>
-                            <span><input type="radio"  name="audience" value="Homme">
-                            <label for="html">Homme</label><br></span>
-                            <span><input type="radio"  name="audience" value="Enfant">
-                            <label for="javascript">Enfant</label></span>
+                            <span><input type="radio"  name="audience" value="Femme" required <?php if((isset($articleinfo)&&$articleinfo['audience']=="Femme")||(isset($value['audience'])&&$value['audience']=="Femme")){?> checked<?php } ?>>
+                            <label for="femme">Femme</label><br></span>
+                            <span><input type="radio"  name="audience" value="Homme" <?php if((isset($articleinfo)&&$articleinfo['audience']=="Homme")||(isset($value['audience'])&&$value['audience']=="Homme")){?> checked<?php } ?>>
+                            <label for="men">Homme</label><br></span>
+                            <span><input type="radio"  name="audience" value="Enfant" <?php if((isset($articleinfo)&&$articleinfo['audience']=="Enfant")||(isset($value['audience'])&&$value['audience']=="Enfant")){?> checked<?php } ?>>
+                            <label for="kid">Enfant</label></span>
                         </div>
 
                         <div class="bo4 of-hidden size15 m-b-20">
-                            <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="descriptionFull" placeholder="<?php if(isset($value['descriptionFull'])){
-                                echo $value['descriptionFull'];
+                            <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="descriptionFull" placeholder="Description détaillée" <?php if(isset($value['descriptionFull'])){
+                                echo 'value="'.$value['descriptionFull'].'"';
                             }
-                            else{
-                                echo "Description détaillée";
+                            else if (isset($articleinfo)){
+                                echo  'value="'.$articleinfo['descriptionFull'].'"';
                             }
-                            ?>">
+
+                            ?>>
                         </div>
                         <div class="bo4 of-hidden size15 m-b-20">
-                            <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="photo" placeholder="<?php if(isset($value['photo'])){
-                                echo $value['photo'];
+                            <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="photo"  placeholder="chemin de la photo" <?php if(isset($value['photo'])){
+                                echo 'value="'.$value['photo'].'"';
                             }
-                            else{
-                                echo "chemin de la photo";
+                            else if (isset($articleinfo)){
+                                echo  'value="'.$articleinfo['photo'].'"';
                             }
-                            ?>">
+                            ?>>
                         </div>
                         <?php if($_GET['action']=="update"){?>
                             <div >
                                 <label >en vente</label><br></span>
-                            <span><input type="radio"  name="active" value="1" required>
+                            <span><input type="radio"  name="active" value="1" required <?php if($articleinfo['active']==1){?> checked<?php } ?>>
                             <label for="css">oui</label><br></span>
-                                <span><input type="radio"  name="audience" value="0">
+                                <span><input type="radio"  name="active" value="0" <?php if($articleinfo['active']==0){?> checked<?php } ?>>
                             <label for="html">non</label><br></span>
 
                             </div>
                             <?php } ?>
 
-						<input type="submit" value="Ajouter un Snow" class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4"><br>
+						<input type="submit" <?php if($_GET['action']=="update"){?>value="Update un snow" <?php } ?>
+
+                        <?php if($_GET['action']=="create"){?>value="Ajouter un Snow" <?php } ?>
+                                 class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4"><br>
 						<input type="reset" value="Annuler" class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4">
 
 					</form>

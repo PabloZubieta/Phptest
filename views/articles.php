@@ -14,6 +14,7 @@ ob_start();// stocke dans une variable tampon
     <div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
         <div class="row">
 <?php foreach (@$articles as $article) :?>
+            <?php if($article['active']==1){?>
 
 
         <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
@@ -55,7 +56,8 @@ ob_start();// stocke dans une variable tampon
 
 
 
-
+<?php }
+?>
 <?php endforeach; ?>
         </div>
     </div>

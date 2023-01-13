@@ -48,16 +48,17 @@ function deleteArticle($code){
 function updateArticle($code,$value){
     try{
         require_once "models/articlesManager.php";
-        updateThisArticle($code,$value);
+        $articleinfo = updateThisArticle($code,$value);
     }   catch (ModelDataBaseException $ex){
         $articleErrorMessage = "Nous rencontrons des problèmes technique pour afficher les produits";
     } finally {
+
         require "views/addArticle.php";
     }
 }
 function createArticle($value){
     try{
-        if(isset($_POST)){
+        if($value!=null){
             require_once "models/articlesManager.php";
             createNewArticle($value);
         }
