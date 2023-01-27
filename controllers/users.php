@@ -20,21 +20,46 @@ function userSign($user)
     }
     return $user;
 }
-function userLogin($email)
+function login($values)
 {
     try {
-        require_once "models/userIdentification.php";
-        $email = getUserIdentification($email);
+        if(isset($values["inputUserEmail"])&&isset($values["inputUserPswd"])) {
+            require_once "models/userIdentification.php";
+            $user = getUserIdentification($values["inputUserEmail"]);
+
+            if (isset($user["userHashPsw"])) {
+                if (password_verify($values["inputUserPswd"], $user["userHashPsw"])) {
+                    $_SESSION["connected"] = $user["id"];
+                    $_SESSION["userType"] = $user["userType"];
+                    $_SESSION["email"] = $values["inputUserEmail"];
+
+                    require "views/home.php";
+                } else {
+                    $error = "wrong password";
+                    require "views/login.php";
+                }
+
+            } else{
+                $error = "no user register for this address";
+                require "views/login.php";
+            }
+
+        }
+        else{
+
+            require "views/login.php";
+        }
+
 
     } catch (ModelDataBaseException $ex) {
         $articleErrorMessage = "Nous rencontrons des problèmes technique lors de votre connection";
     } finally {
-        //require "views/login.php";
+
 
     }
-    return $email;
+
 }
-function login($loginRequest){
+function oldlogin($loginRequest){
 
 
 

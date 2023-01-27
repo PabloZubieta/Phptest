@@ -7,23 +7,10 @@
  */
 
 $title = "j'te connais toi";
-@$login = $_POST["inputEmail"];
-@$pass = $_POST["inputUserPswd"];
-@$valider = $_POST["login"];
-$erreur="";
-$trypass=userLogin($login);
-if(isset($valider)){
-    if($pass==$trypass[0]['password']) {
 
-        $_SESSION["connected"]= $trypass[0]['id'];
-        header("location:index.php?action=home");
-    }
-    else {
-        $erreur="le login et le mot de passe ne correspond pas";
 
-    }
 
-}
+
 ob_start();// stocke dans une variable tampon
 ?>
 
@@ -48,24 +35,31 @@ Connectez-vous
 						</h4>
 
 						<div class="bo4 of-hidden size15 m-b-20">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="email" name="inputEmail" placeholder="Adresse email">
+							<input class="sizefull s-text7 p-l-22 p-r-22" type="email" name="inputEmail" placeholder="Adresse email" <?php
+                            if (isset($_POST["inputEmail"])){
+                                ?>
+                                value="<?=$_POST["inputEmail"]?>
+                                <?php
+                            }
+                            ?>">
 						</div>
 
 						<div class="bo4 of-hidden size15 m-b-20">
 							<input class="sizefull s-text7 p-l-22 p-r-22" type="password" name="inputUserPswd" placeholder="Mot de passe">
 						</div>
+
 						<input type="submit" value="login" class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4"><br>
 						<input type="reset" value="Annuler" class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4">
 
 					</form>
-                    <?php if(!empty($erreur)){?>
-    <div id="erreur" >
-    <?=$erreur?>
-    </div>
+                    <?php if(isset($error)){?>
+                        <div id="erreur" class="text-black" >
+                            <?=$error?>
+                        </div>
 
 
 
-<?php }?>
+                    <?php }?>
 				</div>
 			</div>
 		</div>
